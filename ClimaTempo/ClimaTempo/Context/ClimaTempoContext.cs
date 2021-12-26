@@ -17,8 +17,8 @@ namespace ClimaTempo.Context
             modelBuilder.Configurations.Add(new PrevisaoClimaMap());
         }
 
-        public DbSet<Estado> Estado { get; set; }
-        public DbSet<Cidade> Cidade { get; set; }
-        public DbSet<PrevisaoClima> PrevisaoClima { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<Cidade> Cidade { get; set; }
+        public virtual DbSet<PrevisaoClima> PrevisaoClima { get; set; }
     }
 }

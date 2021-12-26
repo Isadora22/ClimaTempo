@@ -1,8 +1,10 @@
-﻿@{
+﻿@model IEnumerable<ClimaTempo.Models.ViewModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
+<div class="jumbotronAtual">
     <h1>Clima Tempo</h1>
 </div>
 
@@ -11,28 +13,50 @@
         <div class="card card-border">
             <h5 class="card-header card-he">Cidades mais quentes hoje</h5>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>               
+                @foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                {
+                    var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;
+                    <div class="col-md-12">
+                        <p>
+                             @Html.DisplayFor(c => conc)
+                             Min
+                             @item.previsao.TemperaturaMinima
+                             Máx
+                             @item.previsao.TemperaturaMaxima                  
+                        </p>
+                    </div>
+                }
             </div>
         </div>
     </div>
 
     <div class="col-md-6">
-        <div class="card card-border">
-            <h5 class="card-header card-he">Cidades mais frias hoje</h5>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>               
+         <div class="card card-border">
+                <h5 class="card-header card-he">Cidades mais frias hoje</h5>
+                <div class="card-body">
+                    @foreach (var item in Model.Where(x => x.previsao.Clima == "Frio"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;
+                        <div class="col-md-12">
+                            <p>
+                                @Html.DisplayFor(c => conc)
+                                Min
+                                @item.previsao.TemperaturaMinima
+                                Máx
+                                @item.previsao.TemperaturaMaxima
+                            </p>
+                        </div>
+                    }
+                </div>         
             </div>
-        </div>
     </div>
 </div>
 
-<div class="row">
-        <div class="col-xs-12 col-sm-2 col-md-12">
-            <label>Cidade</label>
-            <select class="select2">
-                <option>Teste </option>
-            </select>
+<div class="row row-1">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model, "Cidade", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownList("Cidade", null, htmlAttributes: new { @class = "form-control select2" })
+            </div>
         </div>
 </div>

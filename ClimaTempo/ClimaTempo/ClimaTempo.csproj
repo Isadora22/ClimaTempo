@@ -127,9 +127,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="DAL\ClimaTempoContext.cs" />
+    <Compile Include="Context\ClimaTempoContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\ClimaTempoInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +143,7 @@
     <Compile Include="Models\Maps\EstadoMap.cs" />
     <Compile Include="Models\Maps\PrevisaoClimaMap.cs" />
     <Compile Include="Models\PrevisaoClima.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +212,7 @@
       <DependentUpon>202112240243443_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

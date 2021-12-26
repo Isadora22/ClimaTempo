@@ -33,4 +33,22 @@ textarea {
    border-color: #4775d1;
 }
 
+/*Novo Jumbotron*/
+@media(min-width: 576px)
+.jumbotronAtual {
+        padding: 2rem 2rem;
+}
+
+.jumbotronAtual {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef;
+    border-radius: 0.3rem;
+}
+
+.row-1 {
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
 

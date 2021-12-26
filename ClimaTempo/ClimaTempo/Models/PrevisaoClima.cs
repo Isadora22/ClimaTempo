@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ClimaTempo.Models
 {
@@ -15,5 +12,10 @@ namespace ClimaTempo.Models
         public decimal TemperaturaMaxima { get; set; }
 
         public virtual Cidade Cidade { get; set; }
+
+        internal object ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
