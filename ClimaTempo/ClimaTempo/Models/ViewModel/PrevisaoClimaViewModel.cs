@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ClimaTempo.Models
+namespace ClimaTempo.Models.ViewModel
 {
-    public class PrevisaoClima
+    public class PrevisaoClimaViewModel
     {
         public int Id { get; set; }
         public int CidadeId { get; set; }
@@ -10,7 +10,7 @@ namespace ClimaTempo.Models
         public string Clima { get; set; }
         public decimal TemperaturaMinima { get; set; }
         public decimal TemperaturaMaxima { get; set; }
+        public Cidade Cidade { get; set; }
 
-        public virtual Cidade Cidade { get; set; }        
     }
 }

@@ -143,7 +143,10 @@
     <Compile Include="Models\Maps\EstadoMap.cs" />
     <Compile Include="Models\Maps\PrevisaoClimaMap.cs" />
     <Compile Include="Models\PrevisaoClima.cs" />
-    <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\ClimaViewModel.cs" />
+    <Compile Include="Models\ViewModel\CidadeViewModel.cs" />
+    <Compile Include="Models\ViewModel\EstadoViewModel.cs" />
+    <Compile Include="Models\ViewModel\PrevisaoClimaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

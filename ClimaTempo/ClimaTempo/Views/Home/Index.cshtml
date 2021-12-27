@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ClimaTempo.Models.ViewModel>
+﻿@model IEnumerable<ClimaTempo.Models.ClimaViewModel>
+@*@model Tuple<ClimaTempo.Models.Cidade, IEnumerable<ClimaTempo.Models.ClimaViewModel>>*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -13,16 +14,16 @@
         <div class="card card-border">
             <h5 class="card-header card-he">Cidades mais quentes hoje</h5>
             <div class="card-body">
-                @foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                @foreach (var item in Model.Where(x => x.PrevisaoVM.Clima == "Quente").Take(3))
                 {
-                    var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;
+                    var conc = item.CidadeVM.Nome + "/" + item.CidadeVM.Estado.UF;
                     <div class="col-md-12">
                         <p>
-                             @Html.DisplayFor(c => conc)
-                             Min
-                             @item.previsao.TemperaturaMinima
-                             Máx
-                             @item.previsao.TemperaturaMaxima                  
+                            @Html.DisplayFor(c => conc)
+                            Min
+                            @item.PrevisaoVM.TemperaturaMinima
+                            Máx
+                            @item.PrevisaoVM.TemperaturaMaxima
                         </p>
                     </div>
                 }
@@ -31,32 +32,163 @@
     </div>
 
     <div class="col-md-6">
-         <div class="card card-border">
-                <h5 class="card-header card-he">Cidades mais frias hoje</h5>
-                <div class="card-body">
-                    @foreach (var item in Model.Where(x => x.previsao.Clima == "Frio"))
-                    {
-                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;
-                        <div class="col-md-12">
-                            <p>
-                                @Html.DisplayFor(c => conc)
-                                Min
-                                @item.previsao.TemperaturaMinima
-                                Máx
-                                @item.previsao.TemperaturaMaxima
-                            </p>
-                        </div>
-                    }
-                </div>         
+        <div class="card card-border">
+            <h5 class="card-header card-he">Cidades mais frias hoje</h5>
+            <div class="card-body">
+                @foreach (var item in Model.Where(x => x.PrevisaoVM.Clima == "Frio").Take(3))
+                {
+                    var conc = item.CidadeVM.Nome + "/" + item.CidadeVM.Estado.UF;
+                    <div class="col-md-12">
+                        <p>
+                            @Html.DisplayFor(c => conc)
+                            Min
+                            @item.PrevisaoVM.TemperaturaMinima
+                            Máx
+                            @item.PrevisaoVM.TemperaturaMaxima
+                        </p>
+                    </div>
+                }
             </div>
+        </div>
     </div>
 </div>
 
 <div class="row row-1">
-        <div class="col-md-12">
-            @Html.LabelFor(model => model, "Cidade", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.DropDownList("Cidade", null, htmlAttributes: new { @class = "form-control select2" })
+    @using (Html.BeginForm())
+            {
+        <div class="col-md-10">
+            @Html.DropDownList("Cidade", null, new SelectList(ViewBag.Cidade))
+        </div> 
+    }
+</div>
+
+
+<h3 class="text-clima"> Clima para os próximos sete dias na cidade </h3>
+<div class="row">
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Segunda</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model)
+                {*@
+                    //var conc = item.Cidade.Nome + "/" + item.cidade.Estado.UF;
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
             </div>
         </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Terça</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;*@
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Quarta</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;*@
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Quinta</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;*@
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Sexta</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;*@
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card card-border">
+            <h5 class="card-header card-he">Sabádo</h5>
+            <div class="card-body">
+                @*@foreach (var item in Model.Where(x => x.previsao.Clima == "Quente"))
+                    {
+                        var conc = item.cidade.Nome + "/" + item.cidade.Estado.UF;*@
+                <div class="col-md-12">
+                    <p>
+                        @*@Html.DisplayFor(c => conc)
+                            Min
+                            @item.previsao.TemperaturaMinima
+                            Máx
+                            @item.previsao.TemperaturaMaxima*@
+                    </p>
+                </div>
+                @*}*@
+            </div>
+        </div>
+    </div>
 </div>
+
