@@ -14,21 +14,32 @@ namespace ClimaTempo.Controllers
 
         public ActionResult Index()
         {
-            //List<Cidade> cidades = db.Cidade.ToList();
-            //List<PrevisaoClima> previsoes = db.PrevisaoClima.ToList();
-            //List<Estado> estados = db.Estado.ToList();
+            ViewBag.Cidade = db.Cidade.Select(c => new SelectListItem
+            {
+                Text = c.Nome,
+                Value = c.Id.ToString()
+            }).ToList();
 
-            ViewBag.Cidade = new SelectList(db.Cidade, "Id", "Nome");
+            //var cidades = db.Cidade.Select(c => new
+            //{
+            //    Id = c.Id,
+            //    Nome = c.Nome
+            //}).ToList();
+
+            //ViewBag.Cidades = new SelectList(cidades, "Id", "Nome");
 
             var model = GetDetails();
 
-            //var query = from p in previsoes
-            //            join c in cidades on p.CidadeId equals c.Id into table1
-            //            from c in table1.ToList()
-            //            where p.DataPrevisao == DateTime.Today
-            //            select p;
-
             return View(model);
+        }
+
+        public PartialViewResult GetCidadePrevisao(int CidadeId)
+        {
+            var previsaoClima = (from pc in db.PrevisaoClima
+                                 where pc.CidadeId == CidadeId
+                                 select pc);
+
+            return PartialView("_EmpTestPartial", previsaoClima);
         }
 
         public IEnumerable<ClimaViewModel> GetDetails()

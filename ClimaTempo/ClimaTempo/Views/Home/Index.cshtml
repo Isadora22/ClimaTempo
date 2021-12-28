@@ -54,12 +54,20 @@
 </div>
 
 <div class="row row-1">
-    @using (Html.BeginForm())
-            {
-        <div class="col-md-10">
-            @Html.DropDownList("Cidade", null, new SelectList(ViewBag.Cidade))
-        </div> 
-    }
+    @*@using (Html.BeginForm("Selecao", "Home", FormMethod.Post, new { id = "TheForm" }))
+        {*@
+    <div class="col-md-6">
+        @Html.DropDownList("Cidade", (IEnumerable<SelectListItem>)ViewBag.Cidade,
+            new { Class = "form-control select2", id = "ddlCidade" })
+    </div>
+    <div id = "partialDiv" >
+        @Html.Partial("_EmpTestPartial") 
+    </div>
+
+    @*<div class="col-md-6">
+            @Html.DropDownList("Cidade", new SelectList(ViewBag.Cidades, "Id", "Nome"))
+        </div>*@
+    @*}*@
 </div>
 
 
@@ -70,8 +78,8 @@
             <h5 class="card-header card-he">Segunda</h5>
             <div class="card-body">
                 @*@foreach (var item in Model)
-                {*@
-                    //var conc = item.Cidade.Nome + "/" + item.cidade.Estado.UF;
+                    {*@
+                //var conc = item.Cidade.Nome + "/" + item.cidade.Estado.UF;
                 <div class="col-md-12">
                     <p>
                         @*@Html.DisplayFor(c => conc)
@@ -192,3 +200,23 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $("#ddlCidade").on("change", function () {
+            $.ajax(
+                {
+                    url: '/Home/GetCidadePrevisao?CidadeId=' + $(this).attr("value"),
+                    type: 'GET',
+                    data: "",
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $("#partialDiv").html(data);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                }
+            );
+        });
+    });
+</script>
