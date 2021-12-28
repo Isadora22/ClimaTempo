@@ -6,5 +6,7 @@
         public string Nome { get; set; }
         public int EstadoId { get; set; }
         public Estado Estado { get; set; }
+
+        public Cidade Cidade { get; set; }  
     }
 }

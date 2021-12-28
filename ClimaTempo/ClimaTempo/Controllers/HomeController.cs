@@ -4,6 +4,7 @@ using ClimaTempo.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ClimaTempo.Controllers
@@ -20,17 +21,43 @@ namespace ClimaTempo.Controllers
                 Value = c.Id.ToString()
             }).ToList();
 
-            //var cidades = db.Cidade.Select(c => new
-            //{
-            //    Id = c.Id,
-            //    Nome = c.Nome
-            //}).ToList();
+            var cidades = db.Cidade.Select(c => new
+            {
+                Id = c.Id,
+                Nome = c.Nome
+            }).ToList();
 
-            //ViewBag.Cidades = new SelectList(cidades, "Id", "Nome");
+            ViewBag.Cidades = new SelectList(cidades, "Id", "Nome");
 
             var model = GetDetails();
 
             return View(model);
+        }
+
+        [HttpPost]
+        public void Upload (HttpPostedFileBase file, string txtname, CidadeViewModel cddAS)
+        {
+            try
+            {
+                string attachmentFilePath = file.FileName;
+                string fileName = attachmentFilePath.Substring(attachmentFilePath.LastIndexOf("\\") + 1);
+
+            }
+            catch (Exception ex)
+            {}
+        }
+
+        [HttpPost]
+        public ActionResult Send(string cidade)
+        {
+            var con = DateTime.Now.ToString() + "-" + cidade;
+            return View(con);
+        }
+
+        [HttpPost]
+        public ActionResult Index(Cidade um)
+        {
+            return View(um);
         }
 
         public PartialViewResult GetCidadePrevisao(int CidadeId)
@@ -75,9 +102,9 @@ namespace ClimaTempo.Controllers
                             DataPrevisao = pc.DataPrevisao,
                         }
                     }).ToList();
-            
+
         }
-     
+
         public ActionResult Sobre()
         {
             ViewBag.Message = "Informações da Candidata";
@@ -89,11 +116,7 @@ namespace ClimaTempo.Controllers
         {
             ViewBag.Message = "Previsão do Tempo";
 
-            var query = from st in db.PrevisaoClima.ToList()
-                        where st.Clima == "Quente"
-                        select st;
-
-            return View(query);
+            return View();
         }
     }
 }

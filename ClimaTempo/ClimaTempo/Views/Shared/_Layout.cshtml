@@ -19,7 +19,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item nvi">
                         @Html.ActionLink("Clima", "Clima", "Home")
                     </li>
 
@@ -41,6 +41,7 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/select2")
+        @Scripts.Render("~/bundles/javascript")
         @RenderSection("scripts", required: false)
     </body>
 </html>

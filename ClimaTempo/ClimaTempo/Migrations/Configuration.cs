@@ -1,20 +1,19 @@
 ﻿namespace ClimaTempo.Migrations
 {
+    using ClimaTempo.Context;
     using ClimaTempo.Models;
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ClimaTempo.Context.ClimaTempoContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ClimaTempoContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ClimaTempo.Context.ClimaTempoContext context)
+        protected override void Seed(ClimaTempoContext context)
         {
             var estados = new List<Estado>
             {

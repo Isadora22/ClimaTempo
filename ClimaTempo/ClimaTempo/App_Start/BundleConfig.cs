@@ -27,6 +27,9 @@ namespace ClimaTempo
 
             bundles.Add(new StyleBundle("~/Content/select2")
                    .Include("~/Content/select2.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/javascript")
+                   .Include("~/Scripts/ClimaTempo.js"));
         }
     }
 }

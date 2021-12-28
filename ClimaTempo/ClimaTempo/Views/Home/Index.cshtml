@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ClimaTempo.Models.ClimaViewModel>
-@*@model Tuple<ClimaTempo.Models.Cidade, IEnumerable<ClimaTempo.Models.ClimaViewModel>>*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -17,14 +16,20 @@
                 @foreach (var item in Model.Where(x => x.PrevisaoVM.Clima == "Quente").Take(3))
                 {
                     var conc = item.CidadeVM.Nome + "/" + item.CidadeVM.Estado.UF;
-                    <div class="col-md-12">
-                        <p>
+                    var tempMin = (int)item.PrevisaoVM.TemperaturaMinima + "°C";
+                    var tempMax = (int)item.PrevisaoVM.TemperaturaMaxima + "°C";
+                    <div class="row">
+                        <div class="col-md-6 text-left">
                             @Html.DisplayFor(c => conc)
-                            Min
-                            @item.PrevisaoVM.TemperaturaMinima
-                            Máx
-                            @item.PrevisaoVM.TemperaturaMaxima
-                        </p>
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            Min @Html.DisplayFor(c => tempMin)
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            Máx @Html.DisplayFor(c => tempMax)
+                        </div>
                     </div>
                 }
             </div>
@@ -38,14 +43,20 @@
                 @foreach (var item in Model.Where(x => x.PrevisaoVM.Clima == "Frio").Take(3))
                 {
                     var conc = item.CidadeVM.Nome + "/" + item.CidadeVM.Estado.UF;
-                    <div class="col-md-12">
-                        <p>
+                    var tempMin = (int)item.PrevisaoVM.TemperaturaMinima + "°C";
+                    var tempMax = (int)item.PrevisaoVM.TemperaturaMaxima + "°C";
+                    <div class="row">
+                        <div class="col-md-6 text-left">
                             @Html.DisplayFor(c => conc)
-                            Min
-                            @item.PrevisaoVM.TemperaturaMinima
-                            Máx
-                            @item.PrevisaoVM.TemperaturaMaxima
-                        </p>
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            Min @Html.DisplayFor(c => tempMin)
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            Máx @Html.DisplayFor(c => tempMax)
+                        </div>
                     </div>
                 }
             </div>
@@ -54,20 +65,11 @@
 </div>
 
 <div class="row row-1">
-    @*@using (Html.BeginForm("Selecao", "Home", FormMethod.Post, new { id = "TheForm" }))
-        {*@
-    <div class="col-md-6">
-        @Html.DropDownList("Cidade", (IEnumerable<SelectListItem>)ViewBag.Cidade,
-            new { Class = "form-control select2", id = "ddlCidade" })
+    <div class="col-md-6" id="uploadTemplate">
+        <h5>Cidade:</h5>
+        @Html.DropDownList("Cidade", ViewBag.Cidade as SelectList, null,
+                new { @class = "form-control select2", onchange = "CallClickFunction(this.value)" })
     </div>
-    <div id = "partialDiv" >
-        @Html.Partial("_EmpTestPartial") 
-    </div>
-
-    @*<div class="col-md-6">
-            @Html.DropDownList("Cidade", new SelectList(ViewBag.Cidades, "Id", "Nome"))
-        </div>*@
-    @*}*@
 </div>
 
 
@@ -79,7 +81,7 @@
             <div class="card-body">
                 @*@foreach (var item in Model)
                     {*@
-                //var conc = item.Cidade.Nome + "/" + item.cidade.Estado.UF;
+                @*//var conc = item.Cidade.Nome + "/" + item.cidade.Estado.UF;*@
                 <div class="col-md-12">
                     <p>
                         @*@Html.DisplayFor(c => conc)
@@ -200,23 +202,3 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $("#ddlCidade").on("change", function () {
-            $.ajax(
-                {
-                    url: '/Home/GetCidadePrevisao?CidadeId=' + $(this).attr("value"),
-                    type: 'GET',
-                    data: "",
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-                        $("#partialDiv").html(data);
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                }
-            );
-        });
-    });
-</script>

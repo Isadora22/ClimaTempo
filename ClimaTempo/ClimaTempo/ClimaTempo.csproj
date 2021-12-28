@@ -169,6 +169,7 @@
     <Content Include="Content\bootstrap-4.3.1.css.map" />
     <Content Include="Content\bootstrap-4.3.1.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\ClimaTempo.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
