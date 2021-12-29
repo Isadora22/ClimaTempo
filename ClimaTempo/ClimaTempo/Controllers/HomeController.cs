@@ -44,7 +44,8 @@ namespace ClimaTempo.Controllers
                                          TemperaturaMaxima = p.TemperaturaMaxima,
                                          TemperaturaMinima = p.TemperaturaMinima,
                                          Clima = p.Clima,
-                                         DataPrevisao = p.DataPrevisao
+                                         DataPrevisao = p.DataPrevisao,
+                                         DiaSemana = p.DataPrevisao.ToString("ddd")
                                      }
                                  }).ToList();
 

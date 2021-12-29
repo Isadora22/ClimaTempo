@@ -9,7 +9,7 @@
             return `
                         <div class="col-md-2 col-lg-2">
                             <div class="card card-border">
-                                <h5 class="card-header card-he"></h5>
+                                <h5 class="card-header card-he">${o.PrevisaoVM.DiaSemana}</h5>
                                 <div class="card-body">
                                     <div class="col-md-12 col-xs-12 col-sm-12">
                                         <p> ${o.PrevisaoVM.Clima}<p/>
