@@ -26,15 +26,16 @@ namespace ClimaTempo.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Send(int cidade)
         {
             JsonResult result = new JsonResult();
 
+            
             var previsaoSeven = (from p in db.PrevisaoClima.ToList()
-                                 where p.Cidade.Id == cidade 
-                                       // && 
-                                       //p.DataPrevisao == DateTime.Today
+                                 where p.Cidade.Id == cidade &&
+                                       p.DataPrevisao <= DateTime.Today.AddDays(7) &&
+                                       p.DataPrevisao >= DateTime.Today 
                                  select new ClimaViewModel()
                                  {
                                      PrevisaoVM = new PrevisaoClimaViewModel()
