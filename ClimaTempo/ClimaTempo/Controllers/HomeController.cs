@@ -1,10 +1,10 @@
 ﻿using ClimaTempo.Context;
 using ClimaTempo.Models;
 using ClimaTempo.Models.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ClimaTempo.Controllers
@@ -21,52 +21,36 @@ namespace ClimaTempo.Controllers
                 Value = c.Id.ToString()
             }).ToList();
 
-            var cidades = db.Cidade.Select(c => new
-            {
-                Id = c.Id,
-                Nome = c.Nome
-            }).ToList();
-
-            ViewBag.Cidades = new SelectList(cidades, "Id", "Nome");
-
             var model = GetDetails();
 
             return View(model);
         }
 
         [HttpPost]
-        public void Upload (HttpPostedFileBase file, string txtname, CidadeViewModel cddAS)
+        public ActionResult Send(int cidade)
         {
-            try
-            {
-                string attachmentFilePath = file.FileName;
-                string fileName = attachmentFilePath.Substring(attachmentFilePath.LastIndexOf("\\") + 1);
+            JsonResult result = new JsonResult();
 
-            }
-            catch (Exception ex)
-            {}
-        }
+            var previsaoSeven = (from p in db.PrevisaoClima.ToList()
+                                 where p.Cidade.Id == cidade 
+                                       // && 
+                                       //p.DataPrevisao == DateTime.Today
+                                 select new ClimaViewModel()
+                                 {
+                                     PrevisaoVM = new PrevisaoClimaViewModel()
+                                     {
+                                         CidadeId = p.CidadeId,
+                                         Id = p.Id,
+                                         TemperaturaMaxima = p.TemperaturaMaxima,
+                                         TemperaturaMinima = p.TemperaturaMinima,
+                                         Clima = p.Clima,
+                                         DataPrevisao = p.DataPrevisao,
+                                     }
+                                 }).ToList();
 
-        [HttpPost]
-        public ActionResult Send(string cidade)
-        {
-            var con = DateTime.Now.ToString() + "-" + cidade;
-            return View(con);
-        }
+            result = this.Json(JsonConvert.SerializeObject(previsaoSeven), JsonRequestBehavior.AllowGet);
 
-        [HttpPost]
-        public ActionResult Index(Cidade um)
-        {
-            return View(um);
-        }
-
-        public PartialViewResult GetCidadePrevisao(int CidadeId)
-        {
-            var previsaoClima = (from pc in db.PrevisaoClima
-                                 where pc.CidadeId == CidadeId
-                                 select pc);
-
-            return PartialView("_EmpTestPartial", previsaoClima);
+            return result;
         }
 
         public IEnumerable<ClimaViewModel> GetDetails()
