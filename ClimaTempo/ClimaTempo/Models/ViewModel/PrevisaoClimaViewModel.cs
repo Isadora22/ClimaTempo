@@ -12,5 +12,7 @@ namespace ClimaTempo.Models.ViewModel
         public decimal TemperaturaMaxima { get; set; }
         public Cidade Cidade { get; set; }
 
+        public string DiaSemana { get; set; }
+
     }
 }

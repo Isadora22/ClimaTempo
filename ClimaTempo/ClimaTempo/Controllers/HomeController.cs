@@ -31,7 +31,6 @@ namespace ClimaTempo.Controllers
         {
             JsonResult result = new JsonResult();
 
-            
             var previsaoSeven = (from p in db.PrevisaoClima.ToList()
                                  where p.Cidade.Id == cidade &&
                                        p.DataPrevisao <= DateTime.Today.AddDays(7) &&
@@ -45,7 +44,7 @@ namespace ClimaTempo.Controllers
                                          TemperaturaMaxima = p.TemperaturaMaxima,
                                          TemperaturaMinima = p.TemperaturaMinima,
                                          Clima = p.Clima,
-                                         DataPrevisao = p.DataPrevisao,
+                                         DataPrevisao = p.DataPrevisao
                                      }
                                  }).ToList();
 
