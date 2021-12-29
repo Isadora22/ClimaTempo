@@ -26,7 +26,7 @@ namespace ClimaTempo.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Send(int cidade)
         {
             JsonResult result = new JsonResult();

@@ -70,7 +70,11 @@
         @Html.DropDownList("Cidade", ViewBag.Cidade as SelectList, null,
                 new { @class = "form-control select2", onchange = "CallClickFunction(this.options[this.selectedIndex].value)" })
     </div>
-    <table class="table table-responsive table-striped table-bordered table-hover" id="TableId"></table>
+</div>
+
+<div class="row">
+    <table class="table" id="TableId">
+    </table>
 </div>
 
 

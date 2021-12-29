@@ -1,10 +1,13 @@
 ﻿function CallClickFunction(cidade) {
 
     var url = "/Home/Send";
-    $.post(url, {
+    $.get(url, {
         cidade: cidade
     }, function (response) {
-        /*$("rData").html(data)*/
-        convertJsonToHtmlTable(JSON.parse(response), $("#TableId"));
+        response = JSON.parse(response);
+        $(response).each(function (i) {
+            document.writeln("<p>Clima: " + response[i].Clima)
+        });
+        //JSON.parse(response), $("#TableId");
     });
 }
